@@ -143,6 +143,10 @@ func (c *Config) GetCertifiedDistributions() []string {
 	return c.CertifiedDistributions
 }
 
+func (c *Config) GetRequiredCryptoPolicies() []string {
+	return c.RequiredCryptoPolicies
+}
+
 func (c *Config) GetFIPSCertifiedModules() []FipsModule {
 	return c.FIPSCertifiedModules
 }

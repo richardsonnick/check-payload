@@ -35,6 +35,7 @@ Steps:
    - Binary: `ErrNotDynLinked`, `ErrGoMissingTag`, `ErrGoNotCgoEnabled`, `ErrLibcryptoMissing`
    - OS: `ErrOSNotCertified` (images not using certified distributions like UBI); `ErrFipsArtifactMissing` (certified artifact not found); `ErrFipsArtifactVersionLow` (artifact version below minimum)
    - Library: `ErrLibcryptoSoMissing` (missing OpenSSL in container images)
+   - Crypto policy: `ErrCryptoPolicyNotAllowed` (RHEL 9 image not using a `required_crypto_policies` value such as `DEFAULT:PQ`); scope it with `tags = [...]` like OS exceptions
 6. Use files or dirs: Specify `files = [...]` or `dirs = [...]` with absolute paths
 
 Examples:

@@ -21,6 +21,7 @@ var (
 	ErrOSNotCertified              = errors.New("operating system is not FIPS certified")
 	ErrDistributionFileMissing     = errors.New("could not find distribution file")
 	ErrCertifiedDistributionsEmpty = errors.New("certified_distributions is empty, consider using -V [VERSION] for check-payload")
+	ErrCryptoPolicyNotAllowed      = errors.New("RHEL 9 image crypto policy is not one of required_crypto_policies")
 	ErrFipsArtifactMissing         = errors.New("required FIPS certified artifact not found")
 	ErrFipsArtifactVersionLow      = errors.New("FIPS certified artifact version below required minimum")
 	ErrFipsArtifactVersionHigh     = errors.New("FIPS certified artifact version above certified maximum")

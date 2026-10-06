@@ -2,6 +2,9 @@ certified_distributions = [
   "Red Hat Enterprise Linux release 9.8 Beta (Plow)",
 ]
 
+# RHEL 9 images must enable post-quantum algorithms in OpenSSL. See OCPSTRAT-3113.
+required_crypto_policies = ["DEFAULT:PQ"]
+
 
 [[payload.ose-network-interface-bond-cni-container.ignore]]
 error = "ErrLibcryptoSoMissing"

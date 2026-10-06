@@ -4,6 +4,9 @@
 
 ### Features
 
+- Add `required_crypto_policies` check: RHEL 9 images must report an allowed
+  crypto policy (`DEFAULT:PQ` for 5.0 and later). See OCPSTRAT-3113.
+
 ### Bug fixes
 
 - Chore: remove cliff.toml configuration

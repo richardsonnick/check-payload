@@ -191,6 +191,12 @@ The symbol scan reads the ELF symbol table and the manifest reads the `.dep-v0` 
 
 A statically linked, CMVP-validated module such as `aws-lc-fips-sys` fails until an operator adds a matching `fips_certified_modules` entry for it, because the tool ships no unverified module claims. Adding that entry is the supported way to accept a validated static module; it reuses the certified-module path rather than an ignore-list exception.
 
+#### Crypto Policy
+
+When `required_crypto_policies` is set, RHEL 9 images must report one of the listed policies in `/etc/crypto-policies/state/current`. The 5.0 and later configurations require `DEFAULT:PQ`, which enables post-quantum algorithms such as ML-KEM in OpenSSL. A failing image reports `ErrCryptoPolicyNotAllowed`.
+
+The check skips RHEL 10 images, whose `DEFAULT` policy already includes post-quantum algorithms, and images that do not ship `crypto-policies`. On FIPS clusters the OS disables the `:PQ` subpolicy automatically, so the check applies to the image as built.
+
 ### Printer
 
 The printer aggregates all the results and formats into a table, csv, markdown, etc. If any errors are found then the process exits non-zero. A successful run returns 0.

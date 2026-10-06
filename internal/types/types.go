@@ -67,6 +67,7 @@ type ConfigFile struct {
 	JavaDisabledAlgorithms []string `json:"java_fips_disabled_algorithms" toml:"java_fips_disabled_algorithms"`
 	CertifiedDistributions []string `json:"certified_distributions" toml:"certified_distributions"`
 	RustDeniedCrypto       []string `json:"rust_denied_crypto" toml:"rust_denied_crypto"`
+	RequiredCryptoPolicies []string `json:"required_crypto_policies" toml:"required_crypto_policies"`
 
 	FIPSCertifiedModules []FipsModule `json:"fips_certified_modules" toml:"fips_certified_modules"`
 

@@ -380,6 +380,7 @@ func walkDirScan(ctx context.Context, cfg *types.Config, tag *v1.TagReference, c
 	results := types.NewScanResults()
 	for _, phase := range []imagePhase{
 		validateOSPhase,
+		validateCryptoPolicyPhase,
 		scanBinariesPhase,
 		validateModuleArtifactsPhase,
 	} {
@@ -396,6 +397,15 @@ func validateOSPhase(_ context.Context, cfg *types.Config, tag *v1.TagReference,
 	}
 	osInfo := validations.ValidateOS(cfg, mountPath)
 	results.Append(types.NewScanResult().SetOS(osInfo).SetComponent(component).SetTag(tag))
+}
+
+func validateCryptoPolicyPhase(_ context.Context, cfg *types.Config, tag *v1.TagReference, component *types.OpenshiftComponent, mountPath string, results *types.ScanResults) {
+	if len(cfg.GetRequiredCryptoPolicies()) == 0 || cfg.ShouldIgnoreOSValidation(tag, component, types.ErrCryptoPolicyNotAllowed) {
+		return
+	}
+	if ve := validations.ValidateCryptoPolicy(cfg, mountPath); ve != nil {
+		results.Append(types.NewScanResult().SetValidationError(ve).SetPath(validations.CryptoPolicyStatePath).SetComponent(component).SetTag(tag))
+	}
 }
 
 func scanBinariesPhase(ctx context.Context, cfg *types.Config, tag *v1.TagReference, component *types.OpenshiftComponent, mountPath string, results *types.ScanResults) {
